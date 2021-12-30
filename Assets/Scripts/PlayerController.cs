@@ -18,6 +18,14 @@ public class PlayerController : MonoBehaviour
 
     Vector2 input;
 
+    public Transform AttackPoint;
+    public float AttackRadius = 0.32f;
+    public LayerMask EnemiesLayer;
+
+    public float attackRate = 1f;
+    private float timeToAttack = 0f;
+    bool attacking = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,15 +55,43 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("isRunning", isRunning);
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (timeToAttack >= attackRate)
         {
-            playerAnimator.SetBool("isRunning", false);
-            legsAnimator.SetBool("isRunning", false);
-            canWalk = false;
-            playerAnimator.SetTrigger("attack");
+            if (Input.GetButtonDown("Fire1"))
+            {
+                //attack
+                attacking = true;
+                timeToAttack = 0;
+                Attack();
 
+
+
+            }
+            attacking = false;
+        }
+        else
+        {
+            attacking = true;
+            timeToAttack += Time.deltaTime;
         }
 
+    }
+
+    void Attack()
+    {
+        playerAnimator.SetBool("isRunning", false);
+        legsAnimator.SetBool("isRunning", false);
+        canWalk = false;
+        playerAnimator.SetTrigger("attack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPoint.position, AttackRadius, EnemiesLayer);
+
+        foreach (var enemy in hitEnemies)
+        {
+            //foreach enemy deal a damage
+            enemy.GetComponent<EnemyController>().ReceiveDamage(1);
+
+        }
     }
 
     void FixedUpdate()
@@ -106,5 +142,12 @@ public class PlayerController : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
         
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(AttackPoint.position, AttackRadius);
     }
 }

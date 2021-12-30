@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 729139676}
   - component: {fileID: 729139677}
   - component: {fileID: 729139678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,8 @@ Transform:
   m_LocalPosition: {x: 11.02, y: 9.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 914331587}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -245,10 +246,10 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 2
   directionToTarget: {x: 0, y: 0}
-  distanceToAttack: 0.6
+  distanceToAttack: 0.5
   TimeToAttack: 1
---- !u!58 &729139678
-CircleCollider2D:
+--- !u!70 &729139678
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -260,9 +261,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 6
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 0.65, y: 0.97}
+  m_Direction: 0
 --- !u!1 &733497098
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +427,68 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 34.07, y: 3.87}
   m_EdgeRadius: 0
+--- !u!1 &914331586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 914331587}
+  - component: {fileID: 914331588}
+  - component: {fileID: 914331589}
+  m_Layer: 0
+  m_Name: detectTargetArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &914331587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914331586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 729139674}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &914331588
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914331586}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 6
+--- !u!114 &914331589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914331586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9b788357092da4a8bb37f7264f80a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 729139677}
 --- !u!1 &1062315865
 GameObject:
   m_ObjectHideFlags: 0
@@ -19864,6 +19927,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 28.1, y: 4.42}
   m_EdgeRadius: 0
+--- !u!1 &1192285183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1192285184}
+  m_Layer: 0
+  m_Name: attackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1192285184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192285183}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.27, y: -0.16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1727369349}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1270259979
 GameObject:
   m_ObjectHideFlags: 0
@@ -22445,6 +22539,7 @@ Transform:
   m_Children:
   - {fileID: 2017308357}
   - {fileID: 733497099}
+  - {fileID: 1192285184}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22484,6 +22579,12 @@ MonoBehaviour:
   legsAnimator: {fileID: 733497101}
   speed: 2.5
   Life: 10
+  AttackPoint: {fileID: 1192285184}
+  AttackRadius: 0.37
+  EnemiesLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  attackRate: 0.5
 --- !u!50 &1727369352
 Rigidbody2D:
   serializedVersion: 4
@@ -29639,7 +29740,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5566038, g: 0.5429512, b: 0.5429512, a: 1}
   m_Origin: {x: -17, y: -8, z: 0}
   m_Size: {x: 36, y: 23, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}

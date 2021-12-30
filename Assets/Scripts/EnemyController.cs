@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     private float currentTimeToAttack;
     public float TimeToAttack;
 
+    private int currentLife = 10;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -21,7 +23,7 @@ public class EnemyController : MonoBehaviour
         startPosition.name = "Skeleton"+ gameObject.GetInstanceID()+" Start position ";
         startPosition.tag = "startPosition";
         startPosition.position = transform.position;
-        currentTimeToAttack = TimeToAttack;
+        //currentTimeToAttack = TimeToAttack;
     }
     // Update is called once per frame
     void Update()
@@ -45,7 +47,7 @@ public class EnemyController : MonoBehaviour
                 else
                 {
                     //near player
-                    currentTimeToAttack = TimeToAttack;
+                   // currentTimeToAttack = TimeToAttack;
                     currentState = "Attacking";
                 }
 
@@ -124,14 +126,40 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void ChangeState(string stateName)
     {
-        target = collision.transform;
-        currentState = "Chasing";
+        currentState = stateName;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void ReceiveDamage(int damage)
     {
-        currentState = "Backing";
+        StartCoroutine(RedDamageFx());
+        currentLife = currentLife - damage;
+        if(currentLife <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
+
+    IEnumerator RedDamageFx()
+    {
+        Color color = GetComponent<SpriteRenderer>().color;
+        for (float oc = 1f; oc >= 0; oc -= 0.1f)
+        {
+            color.g = oc;
+            color.b = oc;
+            GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSeconds(.025f);
+        }
+        for (float oc = 0f; oc <= 1; oc += 0.1f)
+        {
+            color.g = oc;
+            color.b = oc;
+            GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSeconds(.025f);
+        }
+
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
 }
